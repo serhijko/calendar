@@ -66,19 +66,15 @@ button#today {
   margin-left: 13px;
 }
 
-#a{
-  background-color:yellow;
-  padding:10px;
-  border:2px solid red;    
-}
-
 .tooltip{
-  background:black;
-  color:white;
-  padding:5px;
-  box-shadow:0 0 10px 0 rgba(0, 0, 0, 1);
-  border-radius:10px;
-  opacity:0;
+  background: black;
+  font-family: "DejaVu Sans", sans-serif;
+  font-size: 13px;
+  color: white;
+  padding: 5px;
+  /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, 1);
+  border-radius: 10px; */
+  opacity: 0;
 }
 
 #calendar {

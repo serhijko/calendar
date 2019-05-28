@@ -63,28 +63,7 @@ document.querySelector('#plusMonth').onclick = function() {
   parseFloat(document.querySelector('#monthYear').dataset.month)+1);
 }
 
-// today button hover
-document.querySelector('#today').mouseover = function() {
-  var days = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], // the weekday names
-  months = ["января", "февраля", "марта", "апреля", "мая", "июня",
-  "июля", "августа", "сентября", "октября", "ноября", "декабря"], // month names instead of numbers 0-11
-  today = new Date();
-  var fadeSpeed = 25;
-  var tip = document.createElement("span");
-  tip.id = "tip";
-  tip.innerHTML = "" + days[today.getDay()] + ", " + today.getDate() + " " + months[today.getMonth()] + " " + today.getFullYear() + " г.";
-  div.appendChild(tip);
-  tip.style.opacity="0";
-  var intId = setInterval(function() {
-    newOpacity = parseFloat(tip.style.opacity) + 0.1;
-    tip.style.opacity = newOpacity.toString();
-    if (tip.style.opacity == "1") {
-      clearInterval(intId);
-    }
-  }, fadeSpeed);
-}
-
-// today button click
+// today button
 document.querySelector('#today').onclick = function() {
   var today = new Date();
   Calendar(today.getFullYear(), today.getMonth());
