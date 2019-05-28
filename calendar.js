@@ -49,10 +49,6 @@ function Calendar(year, month) {
   document.querySelector('nav span').dataset.year = lastDay.getFullYear();
 }
 
-/* пустые клетки после последнего дня месяца
-if (D1Nlast != 0) {}
-*/
-
 Calendar(new Date().getFullYear(), new Date().getMonth());
 
 // minus month button
@@ -65,4 +61,10 @@ document.querySelector('#minusMonth').onclick = function() {
 document.querySelector('#plusMonth').onclick = function() {
   Calendar(document.querySelector('nav span').dataset.year,
   parseFloat(document.querySelector('nav span').dataset.month)+1);
+}
+
+// today button
+document.querySelector('#today').onclick = function() {
+  var today = new Date();
+  Calendar(today.getFullYear(), today.getMonth());
 }
