@@ -6,8 +6,8 @@ var days = ["Воскресенье", "Понедельник", "Вторник"
 months = ["января", "февраля", "марта", "апреля", "мая", "июня",
   "июля", "августа", "сентября", "октября", "ноября", "декабря"], // month names instead of numbers 0-11
 today = new Date();
-var tipMessage = "Следующий месяц";
-// + days[today.getDay()] + ", " + today.getDate() + " " + months[today.getMonth()] + " " + today.getFullYear() + " г.";
+var tipMessage = days[today.getDay()] + ", " +
+  today.getDate() + " " + months[today.getMonth()] + " " + today.getFullYear() + " г.";
 
 var showTip = function(){    
   var tip = document.createElement("span");
