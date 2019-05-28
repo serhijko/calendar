@@ -44,26 +44,47 @@ function Calendar(year, month) {
 
   document.querySelector('#calendar thead').innerHTML = calendarHead;
   document.querySelector('#calendar tbody').innerHTML = calendarBody;
-  document.querySelector('nav span').innerHTML = months[lastDay.getMonth()] + ' ' + lastDay.getFullYear();
-  document.querySelector('nav span').dataset.month = lastDay.getMonth();
-  document.querySelector('nav span').dataset.year = lastDay.getFullYear();
+  document.querySelector('#monthYear').innerHTML = months[lastDay.getMonth()] + ' ' + lastDay.getFullYear();
+  document.querySelector('#monthYear').dataset.month = lastDay.getMonth();
+  document.querySelector('#monthYear').dataset.year = lastDay.getFullYear();
 }
 
 Calendar(new Date().getFullYear(), new Date().getMonth());
 
 // minus month button
 document.querySelector('#minusMonth').onclick = function() {
-  Calendar(document.querySelector('nav span').dataset.year,
-  parseFloat(document.querySelector('nav span').dataset.month)-1);
+  Calendar(document.querySelector('#monthYear').dataset.year,
+  parseFloat(document.querySelector('#monthYear').dataset.month)-1);
 }
 
 // plus month button
 document.querySelector('#plusMonth').onclick = function() {
-  Calendar(document.querySelector('nav span').dataset.year,
-  parseFloat(document.querySelector('nav span').dataset.month)+1);
+  Calendar(document.querySelector('#monthYear').dataset.year,
+  parseFloat(document.querySelector('#monthYear').dataset.month)+1);
 }
 
-// today button
+// today button hover
+document.querySelector('#today').mouseover = function() {
+  var days = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], // the weekday names
+  months = ["января", "февраля", "марта", "апреля", "мая", "июня",
+  "июля", "августа", "сентября", "октября", "ноября", "декабря"], // month names instead of numbers 0-11
+  today = new Date();
+  var fadeSpeed = 25;
+  var tip = document.createElement("span");
+  tip.id = "tip";
+  tip.innerHTML = "" + days[today.getDay()] + ", " + today.getDate() + " " + months[today.getMonth()] + " " + today.getFullYear() + " г.";
+  div.appendChild(tip);
+  tip.style.opacity="0";
+  var intId = setInterval(function() {
+    newOpacity = parseFloat(tip.style.opacity) + 0.1;
+    tip.style.opacity = newOpacity.toString();
+    if (tip.style.opacity == "1") {
+      clearInterval(intId);
+    }
+  }, fadeSpeed);
+}
+
+// today button click
 document.querySelector('#today').onclick = function() {
   var today = new Date();
   Calendar(today.getFullYear(), today.getMonth());
