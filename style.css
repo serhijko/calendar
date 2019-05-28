@@ -102,6 +102,22 @@ button#today {
 
 #calendar thead th.today, #calendar tbody td.today {
   background: rgb(244, 244, 244);
+}
+
+#calendar thead th.event, #calendar tbody td.event {
+  background: rgb(193, 228, 255);
+}
+
+p.today, p.event {
   color: #000000;
   font-weight: bold;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+p.event {
+  margin-bottom: 0.25em;
 }

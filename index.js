@@ -1,6 +1,6 @@
 var div = document.getElementById('wrapper');
 var btn = document.getElementById("today");
-var fadeSpeed = 25; // a value between 1 and 1000 where 1000 will take 10
+var fadeSpeed = 50; // a value between 1 and 1000 where 1000 will take 10
                     // seconds to fade in and out and 1 will take 0.01 sec.
 var days = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], // the weekday names
 months = ["января", "февраля", "марта", "апреля", "мая", "июня",
