@@ -1,12 +1,12 @@
 var events = [
   {
-    date: 1552089600000, // 2019-03-09
+    date: "2019-03-09",
     event: "Напиться!",
     participants: "Витя Костин, Петр Михайлов",
     description: "",
   },
   {
-    date: 1553212800000, // 2019-03-22
+    date: "2019-03-22",
     event: "ДР!",
     participants: "Дима Молодцов",
     description: "",
