@@ -9,13 +9,16 @@ body {
 }
 
 header {
-  margin: 0px;
   padding: 5px;
   background-color: rgb(244, 244, 244);
   border-bottom: 2.5px solid rgb(214, 214, 214);
 }
 
-header div {
+header > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px;
   margin: 45px auto 15px;
   width: 918px;
 }
@@ -31,6 +34,15 @@ header button {
   display: inline-block;
   margin-right: 7px;
   border-radius: 4px;
+}
+
+div.loupe {
+  display: inline-block;
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  color: rgb(147, 147, 147);
+  margin-right: 5px;
 }
 
 nav {
