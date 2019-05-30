@@ -20,6 +20,9 @@ function onSearchChange() {
 
 function isSearched(searchTerm) {
   return function(item) {
-    return item.event.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
+    return item.event.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+    ((new Date(item.date)).getDate() + ' ' + 
+      months[(new Date(item.date)).getMonth()]).indexOf(searchTerm.toLowerCase()) !== -1 ||
+    item.participants.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
   }
 }
