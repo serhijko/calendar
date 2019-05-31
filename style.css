@@ -61,7 +61,7 @@ div.loupe {
   overflow-y: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   margin-top: 15px;
-  padding: 12px 16px;
+  padding: 7px 7px;
   z-index: 1;
 }
 
@@ -157,4 +157,28 @@ p {
 
 p.event {
   margin-bottom: 0.25em;
+}
+
+p.date {
+  font-size: 12px;
+  color: rgb(153, 153, 153);
+}
+
+hr.list {
+  color: rgb(239, 239, 239);
+  height: 1px;
+  margin: 5px;
+}
+
+div.list {
+  padding: 4px 6px;
+}
+
+div.list:hover {
+  background-color: rgb(24, 159, 255);
+  cursor: pointer;
+}
+
+div.list:hover p {
+  color: white;
 }
