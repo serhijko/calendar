@@ -4,7 +4,7 @@ function onSearchChange() {
   var div = '';
   
   events.filter(isSearched(searchTerm)).map(item => 
-    div += '<div class="list" id="' + item.date + '" onClick="toEvent(' + (new Date(item.date)).getFullYear() +
+    div += '<div class="list" onClick="toEvent(' + (new Date(item.date)).getFullYear() +
             ', ' + (new Date(item.date)).getMonth() + ')">' +
             '<p class="event">'+ item.event + '</p>' +
             '<p class="date">' + (new Date(item.date)).getDate() + ' ' +

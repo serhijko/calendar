@@ -53,13 +53,13 @@ div.loupe {
 
 #dropdownList {
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   min-width: 160px;
   max-width: 210px;
   max-height: 300px;
   overflow-x: hidden;
   overflow-y: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   margin-top: 15px;
   padding: 7px 7px;
   z-index: 1;
@@ -131,6 +131,7 @@ button#today {
 }
 
 #calendar thead th, tbody td {
+  position: relative;
   width: 110px;
   height: 110px;
   padding: 10px;
@@ -143,6 +144,111 @@ button#today {
 
 #calendar thead th.event, #calendar tbody td.event {
   background: rgb(193, 228, 255);
+}
+
+div.square {
+  width: 100%;
+  height: 100%;
+}
+div.square:hover {
+  cursor: pointer;
+}
+
+div#closeForm {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+div#closeForm:hover {
+  cursor: pointer;
+}
+
+#calendar th:hover, #calendar td:hover {
+  background-color: rgb(229, 241, 250);
+  border: 2px solid rgb(135, 194, 241);
+}
+
+#calendar th .form1L, #calendar th .form1R,
+#calendar td .form1L, #calendar td .form1R,
+#calendar td .form2L, #calendar td .form2R,
+#calendar td .form3L, #calendar td .form3R {
+  visibility: hidden;
+  width: 310px;
+  height: 360px;
+  background-color: white;
+  color: #000;
+  text-align: center;
+  border-radius: 2px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+#calendar th .form1L, #calendar td .form1L {
+  top: -20px;
+  left: 112%;
+}
+#calendar th .form1R, #calendar td .form1R {
+  top: -20px;
+  right: 112%;
+}
+
+#calendar td .form2L {
+  top: -120px;
+  left: 112%;
+}
+#calendar td .form2R {
+  top: -120px;
+  right: 112%;
+}
+
+#calendar td .form3L {
+  top: -220px;
+  left: 112%;
+}
+#calendar td .form3R {
+  top: -220px;
+  right: 112%;
+}
+
+#calendar th .form1L::after, #calendar td .form1L::after, #calendar td .form2L::after, #calendar td .form3L::after,
+#calendar th .form1R::after, #calendar td .form1R::after, #calendar td .form2R::after, #calendar td .form3R::after {
+  content: "";
+  position: absolute;
+  margin-top: -7px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent transparent white white;
+  transform-origin: 0 0;
+}
+#calendar th .form1L::after, #calendar td .form1L::after, #calendar td .form2L::after, #calendar td .form3L::after {
+  right: 95.3%;
+  transform: rotate(45deg);
+  box-shadow: -3px 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+#calendar th .form1R::after, #calendar td .form1R::after, #calendar td .form2R::after, #calendar td .form3R::after {
+  left: 100%;
+  transform: rotate(-135deg);
+  box-shadow: -4px 3px 4px 0px rgba(0, 0, 0, 0.2);
+}
+#calendar th .form1L::after, #calendar td .form1L::after {
+  top: 9%;
+}
+#calendar th .form1R::after, #calendar td .form1R::after {
+  top: 14.5%;
+}
+#calendar td .form2L::after {
+  top: 48.5%;
+}
+#calendar td .form2R::after {
+  top: 53.75%;
+}
+#calendar td .form3L::after {
+  top: 89%;
+}
+#calendar td .form3R::after {
+  top: 94%;
 }
 
 p.today, p.event {
@@ -181,4 +287,35 @@ div.list:hover {
 
 div.list:hover p {
   color: white;
+}
+
+input.eventForm, textarea.eventForm {
+  width: 85%;
+  padding: 5px 5px;
+  margin: 3px 0;
+  box-sizing: border-box;
+  font-family: "Arial";
+  font-size: 12px;
+}
+
+input#eventInput {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+textarea.eventForm {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  font-size: 12px;
+}
+
+div.submit {
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  margin: auto;
+}
+div.submit > button {
+  display: block;
+  margin-right: 13px;
 }

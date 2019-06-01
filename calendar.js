@@ -14,8 +14,8 @@ function Calendar(year, month) {
     d.setDate(d.getDate() - 6);
   }
 
-  var todayBool = false;
-  var eventBool = false;
+  var todayBool = false; // = true for today
+  var eventBool = false; // = true for day with event
   // the first week of the current month (with the days of this week of the previous month)
   for(var i = 1; i <= 7; i++, d.setDate(d.getDate() + 1)) {
     if (d.getFullYear() == today.getFullYear() && d.getMonth() == today.getMonth() && d.getDate() == today.getDate()) {
@@ -25,31 +25,42 @@ function Calendar(year, month) {
       var date = new Date(events[j].date);
       if (date.getFullYear() == d.getFullYear() && date.getMonth() == d.getMonth() && date.getDate() == d.getDate()) {
         eventBool = true;
-        break;
+        break; // in the case of no more than one event per day
       }
     }
+
+    var sq = "'";
     
     if (todayBool && eventBool) {
-      calendarHead += '<th class="event"><p class="today">' + days[d.getDay()] + ', '
-        + d.getDate() + '</p>'; // to set CSS style for today's date and date with event
+      calendarHead += '<th class="event"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+        ')"><p class="today">' + days[d.getDay()] + ', ' + d.getDate() + '</p>'; // to set CSS style for today's date and date with event
     } else if (todayBool) {
-      calendarHead += '<th class="today"><p class="today">' + days[d.getDay()] + ', '
-        + d.getDate() + '</p>'; // to set CSS style for today's date
+      calendarHead += '<th class="today"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+        ')"><p class="today">' + days[d.getDay()] + ', ' + d.getDate() + '</p>'; // to set CSS style for today's date
     } else if (eventBool) {
-      calendarHead += '<th class="event"><p>' + days[d.getDay()] + ', '
-        + d.getDate() + '</p>'; // to set CSS style for date with event
+      calendarHead += '<th class="event"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+        ')"><p>' + days[d.getDay()] + ', ' + d.getDate() + '</p>'; // to set CSS style for date with event
     } else {
-      calendarHead += '<th><p>' + days[d.getDay()] + ', ' + d.getDate() + '</p>';
+      calendarHead += '<th><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq + ')"><p>'
+        + days[d.getDay()] + ', ' + d.getDate() + '</p>';
     }
     if (eventBool) {
       calendarHead += '<p class="event">' + events[j].event + '</p><p>' + events[j].participants + '</p>';
     }
+    calendarHead += '</div>';
+
+    if (d.getDay() > 0 && d.getDay() < 4)
+      calendarHead += '<div class="form1L" id="' + toISODateFormat(d) + '" />';
+    else calendarHead += '<div class="form1R" id="' + toISODateFormat(d) + '" />';
+
     calendarHead += '</th>';
     todayBool = false;
     eventBool = false;
   }
 
   calendarHead += '</tr>';
+
+  var monthWeek = 2;
 
   // the remaining days of the month (with the days of the next month belonging to the last week of this month)
   for(; d <= lastDay || d.getDay() != 1; d.setDate(d.getDate() + 1)) {
@@ -64,22 +75,40 @@ function Calendar(year, month) {
       date = new Date(events[j].date);
       if (date.getFullYear() == d.getFullYear() && date.getMonth() == d.getMonth() && date.getDate() == d.getDate()) {
         eventBool = true;
-        break;
+        break; // in the case of no more than one event per day
       }
     }
 
     if (todayBool && eventBool) {
-      calendarBody += '<td class="event"><p class="today">' + d.getDate() + '</p>'; // to set CSS style for today's date
-      // and date with event
+      calendarBody += '<td class="event"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+        ')"><p class="today">' + d.getDate() + '</p>'; // to set CSS style for today's date and date with event
     } else if (todayBool) {
-      calendarBody += '<td class="today"><p class="today">' + d.getDate() + '</p>'; // to set CSS style for today's date
+      calendarBody += '<td class="today"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+        ')"><p class="today">' + d.getDate() + '</p>'; // to set CSS style for today's date
     } else if (eventBool) {
-      calendarBody += '<td class="event"><p>' + d.getDate() + '</p>'; // to set CSS style for date with event
+      calendarBody += '<td class="event"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+        ')"><p>' + d.getDate() + '</p>'; // to set CSS style for date with event
     } else {
-      calendarBody += '<td><p>' + d.getDate() + '</p>';
+      calendarBody += '<td><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+        ')"><p>' + d.getDate() + '</p>';
     }
     if (eventBool) {
       calendarBody += '<p class="event">' + events[j].event + '</p><p>' + events[j].participants + '</p>';
+    }
+    calendarBody += '</div>';
+
+    if (monthWeek < 3) {
+      if (d.getDay() > 0 && d.getDay() < 4)
+        calendarBody += '<div class="form1L" id="' + toISODateFormat(d) + '" />';
+      else calendarBody += '<div class="form1R" id="' + toISODateFormat(d) + '" />';
+    } else if (monthWeek == 3) {
+      if (d.getDay() > 0 && d.getDay() < 4)
+        calendarBody += '<div class="form2L" id="' + toISODateFormat(d) + '" />';
+      else calendarBody += '<div class="form2R" id="' + toISODateFormat(d) + '" />';
+    } else {
+      if (d.getDay() > 0 && d.getDay() < 4)
+        calendarBody += '<div class="form3L" id="' + toISODateFormat(d) + '" />';
+      else calendarBody += '<div class="form3R" id="' + toISODateFormat(d) + '" />';
     }
     calendarBody += '</td>';
     todayBool = false;
@@ -87,6 +116,7 @@ function Calendar(year, month) {
 
     if (d.getDay() == 0) {
       calendarBody += '</tr>';
+      monthWeek++;
     }
   }
 
