@@ -24,17 +24,66 @@ header > div {
   width: 918px;
 }
 
-header button {
+.headerButton {
   background-color: rgb(0, 111, 202);
   border: none;
   font-weight: bold;
   color: white;
+  text-shadow: 0px 2px 2px rgb(0, 92, 168);
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   margin-right: 7px;
   border-radius: 4px;
+}
+.headerButton:active {
+  background-color: rgb(0, 91, 166);
+  border: 1px solid rgb(0, 69, 125);
+  color: rgb(194, 208, 227);
+  text-shadow: 0px 2px 2px rgb(0, 80, 146);
+  padding: 4px 9px;
+}
+
+div#quickAddRenew {
+  position: relative;
+  display: inline-block;
+}
+
+div#quickAddForm {
+  visibility: hidden;
+  background-color: white;
+  border-radius: 2px;
+  padding: 20px 25px 20px 20px;
+  position: absolute;
+  z-index: 1;
+  top: 168%;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3));
+}
+div#quickAddForm::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 9%;
+  margin-left: -9px;
+  border-width: 9px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+}
+
+#quickInput {
+  width: 265px;
+  margin-bottom: 10px;
+}
+
+div#closeQuickAddForm {
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  font-size: 12px;
+}
+div#closeQuickAddForm:hover {
+  cursor: pointer;
 }
 
 div.loupe {

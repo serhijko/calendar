@@ -25,9 +25,7 @@ function onOpenEventAdd(id) {
 
 function eventAdd(id) {
   var eventName = document.getElementById("eventInput").value;
-  console.log(eventName);
   var isoDate = document.getElementById("dateInput").value;
-  console.log(isoDate);
   var participants = document.getElementById("participants").value;
   var description = document.getElementById("description").value;
   events.push(
@@ -80,4 +78,86 @@ function toISODateFormat(date) {
   )
 
   return isoDate;
+}
+
+function openQuickAddForm() {
+  var quickAddButton = document.getElementById('add');
+  var quickAddForm = document.getElementById('quickAddForm');
+  /*
+  var addButton = document.getElementById('add');
+  var form = document.createElement('div');
+  form.id = "quickAdd";
+  var closeButton = '<div id="closeForm" onClick="closeQuickAdd()">×</div>';
+  var input = '<input class="eventForm" id="quickInput" placeholder="5 марта, 14:00, День рождения" />';
+  var createButton = '<button type="button" onClick="eventAdd()">Создать</button>';
+  form.innerHTML = closeButton + input + createButton;
+  addButton.appendChild(form);
+  */
+  quickAddButton.style.backgroundColor = 'rgb(0, 91, 166)';
+  quickAddButton.style.border = '1px solid rgb(0, 69, 125)';
+  quickAddButton.style.color = 'rgb(194, 208, 227)';
+  quickAddButton.style.textShadow = '0px 2px 2px rgb(0, 80, 146)';
+  quickAddButton.style.padding = '4px 9px';
+
+  quickAddForm.style.visibility = 'visible';
+  document.getElementById('quickInput').focus();
+}
+
+function eventQuickAdd() {
+  var eventStr = document.getElementById("quickInput").value;
+  var day = eventStr.slice(0, 1) / 1;
+  if (day === NaN) {
+    alert("Введите число даты события!");
+  }
+  if (day < 10) {
+    var res = eventStr.slice(2);
+  } else {
+    res = eventStr.slice(3);
+  }
+  var month = -1, monthCheckString = res.slice(0, 8);
+  do {
+    month++;
+    var pos = monthCheckString.indexOf(months[month]);
+  } while (pos === -1 && month < 12)
+  if (pos === -1) {
+    alert("Введите месяц после числа даты события!");
+  }
+  if (day !== NaN && pos !== -1) {
+    var date = new Date(today.getFullYear(), month, day);
+    var isoDate = toISODateFormat(date);
+
+    pos = pos + months[month].length;
+    while (res.charAt(pos) === ',' || res.charAt(pos) === ' ') {
+      pos++;
+    }
+
+    var eventName = res.slice(pos);
+    var participants = "";
+    var description = "";
+
+    events.push(
+      {
+        date: isoDate,
+        event: eventName,
+        participants: participants,
+        description: description,
+      }
+    );
+    closeQuickAdd();
+    eventDisplay(isoDate);
+  }
+}
+
+function closeQuickAdd() {
+  var quickAddForm = document.getElementById('quickAddForm');
+  var quickAddButton = document.getElementById('add');
+
+  document.getElementById('quickInput').value = '';
+  quickAddForm.style.visibility = 'hidden';
+
+  quickAddButton.style.backgroundColor = 'rgb(0, 111, 202)';
+  quickAddButton.style.border = 'none';
+  quickAddButton.style.color = 'white';
+  quickAddButton.style.textShadow = '0px 2px 2px rgb(0, 92, 168)';
+  quickAddButton.style.padding = '5px 10px';
 }

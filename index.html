@@ -8,14 +8,19 @@
   <body>
     <header>
       <div>
-        <div>
-          <button type="button" id="add" title="Добавить событие">
+        <div id="quickAddRenew">
+          <button type="button" class="headerButton" id="add" title="Добавить событие" onclick="openQuickAddForm()">
             Добавить
           </button>
-          <button type="button" id="add" title="">
+          <button type="button" class="headerButton" id="renew" title="Очистить localStorage">
             Обновить
           </button>
-        </div>
+          <div id="quickAddForm">
+            <div id="closeQuickAddForm" onClick="closeQuickAdd()">×</div>
+            <input class="eventForm" id="quickInput" placeholder="5 марта, День рождения" />
+            <button type="button" onClick="eventQuickAdd()">Создать</button>
+          </div>
+      </div>
         <form class="search">
           <div class="loupe">⚲</div>
           <div class="dropdown">
