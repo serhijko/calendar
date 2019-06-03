@@ -32,17 +32,21 @@ function Calendar(year, month) {
     var sq = "'";
     
     if (todayBool && eventBool) {
-      calendarHead += '<th class="event"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+      calendarHead += '<th class="event"><div class="square" onClick="onOpenEventAdd('
+        + sq + toISODateFormat(d) + sq + ', ' + eventBool + ', ' + j +
         ')"><p class="today">' + days[d.getDay()] + ', ' + d.getDate() + '</p>'; // to set CSS style for today's date and date with event
     } else if (todayBool) {
-      calendarHead += '<th class="today"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+      calendarHead += '<th class="today"><div class="square" onClick="onOpenEventAdd('
+        + sq + toISODateFormat(d) + sq + ', ' + eventBool + ', ' + j +
         ')"><p class="today">' + days[d.getDay()] + ', ' + d.getDate() + '</p>'; // to set CSS style for today's date
     } else if (eventBool) {
-      calendarHead += '<th class="event"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+      calendarHead += '<th class="event"><div class="square" onClick="onOpenEventAdd('
+        + sq + toISODateFormat(d) + sq + ', ' + eventBool + ', ' + j +
         ')"><p>' + days[d.getDay()] + ', ' + d.getDate() + '</p>'; // to set CSS style for date with event
     } else {
-      calendarHead += '<th><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq + ')"><p>'
-        + days[d.getDay()] + ', ' + d.getDate() + '</p>';
+      calendarHead += '<th><div class="square" onClick="onOpenEventAdd('
+        + sq + toISODateFormat(d) + sq + ', ' + eventBool + ', ' + j +
+        ')"><p>' + days[d.getDay()] + ', ' + d.getDate() + '</p>';
     }
     if (eventBool) {
       calendarHead += '<p class="event">' + events[j].event + '</p><p>' + events[j].participants + '</p>';
@@ -80,16 +84,20 @@ function Calendar(year, month) {
     }
 
     if (todayBool && eventBool) {
-      calendarBody += '<td class="event"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+      calendarBody += '<td class="event"><div class="square" onClick="onOpenEventAdd('
+        + sq + toISODateFormat(d) + sq + ', ' + eventBool + ', ' + j +
         ')"><p class="today">' + d.getDate() + '</p>'; // to set CSS style for today's date and date with event
     } else if (todayBool) {
-      calendarBody += '<td class="today"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+      calendarBody += '<td class="today"><div class="square" onClick="onOpenEventAdd('
+        + sq + toISODateFormat(d) + sq + ', ' + eventBool + ', ' + j +
         ')"><p class="today">' + d.getDate() + '</p>'; // to set CSS style for today's date
     } else if (eventBool) {
-      calendarBody += '<td class="event"><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+      calendarBody += '<td class="event"><div class="square" onClick="onOpenEventAdd('
+        + sq + toISODateFormat(d) + sq + ', ' + eventBool + ', ' + j +
         ')"><p>' + d.getDate() + '</p>'; // to set CSS style for date with event
     } else {
-      calendarBody += '<td><div class="square" onClick="onOpenEventAdd(' + sq + toISODateFormat(d) + sq +
+      calendarBody += '<td><div class="square" onClick="onOpenEventAdd('
+        + sq + toISODateFormat(d) + sq + ', ' + eventBool + ', ' + j +
         ')"><p>' + d.getDate() + '</p>';
     }
     if (eventBool) {

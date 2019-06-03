@@ -1,4 +1,4 @@
-function onOpenEventAdd(id) {
+function onOpenEventAdd(id, eventBool, arrNum) {
   var formContainer = document.getElementById(id);
 
   var sq = "'";
@@ -6,12 +6,22 @@ function onOpenEventAdd(id) {
   var closeButton = '<div id="closeForm" onClick="onCloseEventAdd(' + sq + id + sq + ')">×</div>';
   var form = document.createElement('div');
   form.id = "eventAdd";
-  var eventInput = '<input class="eventForm" id="eventInput" type="text" name="event" placeholder="Событие" />';
-  var dateInput = '<input class="eventForm" id="dateInput" type="date" name="date" placeholder="День, месяц, год" value="' + id + '" />';
-  var participantsInput = '<input class="eventForm" id="participants" type="text" name="participants" placeholder="Имена участников" />';
-  var description = '<textarea class="eventForm" id="description" name="description" rows="7" placeholder="Описание"></textarea>';
-  var submitButton = '<button type="button" onClick="eventAdd(' + sq + id + sq + ')">Готово</button>';
-  var resetButton = '<input type="reset" value="Удалить" />';
+  if (eventBool === true) {
+    var eventInput = '<div class="eventForm" id="eventInput">' + events[arrNum].event + '</div>';
+    var date = new Date(events[arrNum].date);
+    var dateInput = '<div class="eventForm" id="dateInput">' + date.getDate() + ' ' + months[date.getMonth()] +
+      '</div>';
+    var participantsInput = '<div class="eventForm" id="participants"><div>Участники:</div>' + events[arrNum].participants + '</div>';
+    var description = '<textarea class="eventForm" id="description" name="description" rows="7" placeholder="Описание">' +
+      events[arrNum].description + '</textarea>';
+  } else {
+    eventInput = '<input class="eventForm" id="eventInput" type="text" name="event" placeholder="Событие" />';
+    dateInput = '<input class="eventForm" id="dateInput" type="date" name="date" placeholder="День, месяц, год" value="' + id + '" />';
+    participantsInput = '<input class="eventForm" id="participants" type="text" name="participants" placeholder="Имена участников" />';
+    description = '<textarea class="eventForm" id="description" name="description" rows="7" placeholder="Описание"></textarea>';
+  }
+  var submitButton = '<button type="button" onClick="eventAdd(' + sq + id + sq + ', ' + eventBool + ', ' + arrNum + ')">Готово</button>';
+  var resetButton = '<button type="button" onClick="reset(' + sq + id + sq + ', ' + eventBool + ', ' + arrNum + ')">Удалить</button>';
   form.innerHTML = eventInput + dateInput + participantsInput + description
     + '<div class="submit">' + submitButton + resetButton + '</div>';
   form.name = "eventAdd";
@@ -23,21 +33,40 @@ function onOpenEventAdd(id) {
   formContainer.style.visibility = 'visible';
 }
 
-function eventAdd(id) {
-  var eventName = document.getElementById("eventInput").value;
-  var isoDate = document.getElementById("dateInput").value;
-  var participants = document.getElementById("participants").value;
+function eventAdd(id, eventBool, arrNum) {
   var description = document.getElementById("description").value;
-  events.push(
-    {
-      date: isoDate,
-      event: eventName,
-      participants: participants,
-      description: description,
-    }
-  );
+  if (eventBool === true) {
+    events[arrNum].description = description;
+  } else {
+    var eventName = document.getElementById("eventInput").value;
+    var isoDate = document.getElementById("dateInput").value;
+    var participants = document.getElementById("participants").value;
+
+    events.unshift(
+      {
+        date: isoDate,
+        event: eventName,
+        participants: participants,
+        description: description,
+      }
+    );
+  }
   onCloseEventAdd(id);
   eventDisplay(isoDate);
+}
+
+function reset(id, eventBool, arrNum) {
+  if (eventBool === true) {
+    var isoDate = events[arrNum].date;
+    events.splice(arrNum, 1);
+    onCloseEventAdd(id);
+    eventDisplay(isoDate);
+  } else {
+    document.getElementById("eventInput").value = "";
+    document.getElementById("dateInput").value = "";
+    document.getElementById("participants").value = "";
+    document.getElementById("description").value = "";
+  }
 }
 
 function onCloseEventAdd(id) {

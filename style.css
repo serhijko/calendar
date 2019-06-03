@@ -338,7 +338,7 @@ div.list:hover p {
   color: white;
 }
 
-input.eventForm, textarea.eventForm {
+.eventForm {
   width: 85%;
   padding: 5px 5px;
   margin: 3px 0;
@@ -347,9 +347,28 @@ input.eventForm, textarea.eventForm {
   font-size: 12px;
 }
 
-input#eventInput {
+#eventInput {
   margin-top: 20px;
   font-size: 16px;
+}
+
+div.eventForm {
+  text-align: left;
+  font-size: 13px;
+  margin-bottom: 8px;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+div.eventForm div {
+  color: rgb(108, 108, 108);
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+div#eventInput {
+  font-weight: bold;
+  font-size: 17px;
 }
 
 textarea.eventForm {
