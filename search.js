@@ -5,16 +5,18 @@ function onSearchChange() {
   var sq = "'";
   
   events.filter(isSearched(searchTerm)).map(item => 
-    div += '<div class="list" onClick="toEvent(' + (new Date(item.date)).getFullYear() +
+    div += '<hr class="list" /><div class="list" onClick="toEvent(' + (new Date(item.date)).getFullYear() +
             ', ' + (new Date(item.date)).getMonth() + ', ' + sq + item.date + sq + ')">' +
             '<p class="event">'+ item.event + '</p>' +
             '<p class="date">' + (new Date(item.date)).getDate() + ' ' +
-            months[(new Date(item.date)).getMonth()] + '</p></div><hr class="list" />'
+            months[(new Date(item.date)).getMonth()] + '</p></div>'
   );
 
   if (div == '') div += '<p>Нет соответствий</p>';
 
   document.querySelector('#dropdownList').innerHTML = div;
+
+
 
   if ( searchTerm )
     a.style.display = 'block';

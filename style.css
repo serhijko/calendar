@@ -119,6 +119,13 @@ div.loupe {
   text-overflow: clip;
 }
 
+hr.list {
+  display: none;
+}
+div.list ~ hr.list {
+  display: block;
+}
+
 nav {
   display: flex;
   flex-direction: row;
