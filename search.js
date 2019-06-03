@@ -2,10 +2,11 @@ function onSearchChange() {
   var searchTerm = document.getElementById('searchInput').value;
   var a = document.getElementById('dropdownList');
   var div = '';
+  var sq = "'";
   
   events.filter(isSearched(searchTerm)).map(item => 
     div += '<div class="list" onClick="toEvent(' + (new Date(item.date)).getFullYear() +
-            ', ' + (new Date(item.date)).getMonth() + ')">' +
+            ', ' + (new Date(item.date)).getMonth() + ', ' + sq + item.date + sq + ')">' +
             '<p class="event">'+ item.event + '</p>' +
             '<p class="date">' + (new Date(item.date)).getDate() + ' ' +
             months[(new Date(item.date)).getMonth()] + '</p></div><hr class="list" />'
@@ -30,6 +31,11 @@ function isSearched(searchTerm) {
   }
 }
 
-function toEvent(eventYear, eventMonth) {
+function toEvent(eventYear, eventMonth, eventISODate) {
   Calendar(eventYear, eventMonth);
+
+  // color mark out the event in the table
+  var f = document.getElementById(eventISODate).parentNode;
+  f.style.border = '2px solid rgb(135, 194, 241)';
+  f.style.backgroundColor = 'rgb(229, 241, 250)';
 }
