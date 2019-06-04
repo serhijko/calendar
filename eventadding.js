@@ -51,6 +51,7 @@ function eventAdd(id, eventBool, arrNum) {
       }
     );
   }
+  localStorage.setObj('events', events);
   onCloseEventAdd(id);
   eventDisplay(isoDate);
 }
@@ -59,6 +60,7 @@ function reset(id, eventBool, arrNum) {
   if (eventBool === true) {
     var isoDate = events[arrNum].date;
     events.splice(arrNum, 1);
+    localStorage.setObj('events', events);
     onCloseEventAdd(id);
     eventDisplay(isoDate);
   } else {
@@ -134,7 +136,8 @@ function openQuickAddForm() {
 
 function eventQuickAdd() {
   var eventStr = document.getElementById("quickInput").value;
-  var day = eventStr.slice(0, 1) / 1;
+  var day = eventStr.slice(0, 2) / 1;
+  console.log(day);
   if (day === NaN) {
     alert("Введите число даты события!");
   }
@@ -172,6 +175,7 @@ function eventQuickAdd() {
         description: description,
       }
     );
+    localStorage.setObj('events', events);
     closeQuickAdd();
     eventDisplay(isoDate);
   }
