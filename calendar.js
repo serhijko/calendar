@@ -4,8 +4,20 @@ function Calendar(year, month) {
   lastDay = new Date(year, month + 1, 0), // the last day of the month
   calendarHead = '<tr>',
   calendarBody = '',
-  months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-  "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"], // month names instead of numbers 0-11
+  months = [
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь", 
+    "Декабрь"
+], // month names instead of numbers 0-11
   days = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]; // the weekday names
 
   if (d.getDay()) { // reset d to monday preceding the first day of the month

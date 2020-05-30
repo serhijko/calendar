@@ -1,22 +1,26 @@
 function onSearchChange() {
-  var searchTerm = document.getElementById('searchInput').value;
-  var a = document.getElementById('dropdownList');
-  var div = '';
-  var sq = "'";
+  const searchTerm = document.getElementById('searchInput').value;
+  const a = document.getElementById('dropdownList');
+  let div = '';
   
-  events.filter(isSearched(searchTerm)).map(item => 
-    div += '<hr class="list" /><div class="list" onClick="toEvent(' + (new Date(item.date)).getFullYear() +
-            ', ' + (new Date(item.date)).getMonth() + ', ' + sq + item.date + sq + ')">' +
-            '<p class="event">'+ item.event + '</p>' +
-            '<p class="date">' + (new Date(item.date)).getDate() + ' ' +
-            months[(new Date(item.date)).getMonth()] + '</p></div>'
-  );
+  events.filter(isSearched(searchTerm)).map(item => {
+    const date = item.date;
+    const dateObj = new Date(date);
+    const fullYear = dateObj.getFullYear();
+    const currentMonth = dateObj.getMonth();
+    const dateInNumber = dateObj.getDate();
+    const event = item.event;
+    div += `
+    <hr class="list" />
+    <div class="list" onClick="toEvent(${fullYear}, ${currentMonth}, '${date}')">
+      <p class="event">${event}</p>
+      <p class="date">${dateInNumber} ${months[currentMonth]}</p>
+    </div>`;
+  });
 
   if (div == '') div += '<p>Нет соответствий</p>';
 
   document.querySelector('#dropdownList').innerHTML = div;
-
-
 
   if ( searchTerm )
     a.style.display = 'block';
@@ -25,11 +29,13 @@ function onSearchChange() {
 }
 
 function isSearched(searchTerm) {
+  const searchterm = searchTerm.toLowerCase();
   return function(item) {
-    return item.event.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-    ((new Date(item.date)).getDate() + ' ' + 
-      months[(new Date(item.date)).getMonth()]).indexOf(searchTerm.toLowerCase()) !== -1 ||
-    item.participants.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
+    const dateObj = new Date(item.date);
+    const dateStr = dateObj.getDate() + ' ' + months[dateObj.getMonth()];
+    return item.event.toLowerCase().includes(searchterm) ||
+      dateStr.includes(searchterm) ||
+      item.participants.toLowerCase().includes(searchterm);
   }
 }
 
@@ -37,7 +43,7 @@ function toEvent(eventYear, eventMonth, eventISODate) {
   Calendar(eventYear, eventMonth);
 
   // color mark out the event in the table
-  var f = document.getElementById(eventISODate).parentNode;
+  const f = document.getElementById(eventISODate).parentNode;
   f.style.border = '2px solid rgb(135, 194, 241)';
   f.style.backgroundColor = 'rgb(229, 241, 250)';
 }

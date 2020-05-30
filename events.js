@@ -7,3 +7,13 @@ Storage.prototype.getObj = function(key) {
 }
 
 var events = (localStorage.getObj('events')) ? localStorage.getObj('events') : [];
+
+function localStorageClear() {
+  if (localStorage.getObj('events') === undefined) {
+    var div = document.getElementById('quickAddRenew');
+    var p = document.createElement('p');
+    p.innerHTML = "Ваш браузер не поддерживает localStorage";
+    div.appendChild(p);
+  }
+  else localStorage.clear();
+}
