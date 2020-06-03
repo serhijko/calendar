@@ -4,18 +4,18 @@ function onSearchChange() {
   let div = '';
   
   events.filter(isSearched(searchTerm)).map(item => {
-    const date = item.date;
+    const { date, event } = item;
     const dateObj = new Date(date);
     const fullYear = dateObj.getFullYear();
     const currentMonth = dateObj.getMonth();
     const dateInNumber = dateObj.getDate();
-    const event = item.event;
     div += `
-    <hr class="list" />
-    <div class="list" onClick="toEvent(${fullYear}, ${currentMonth}, '${date}')">
-      <p class="event">${event}</p>
-      <p class="date">${dateInNumber} ${months[currentMonth]}</p>
-    </div>`;
+      <hr class="list" />
+      <div class="list" onClick="toEvent(${fullYear}, ${currentMonth}, '${date}')">
+        <p class="event">${event}</p>
+        <p class="date">${dateInNumber} ${months[currentMonth]}</p>
+      </div>
+    `;
   });
 
   if (div == '') div += '<p>Нет соответствий</p>';
@@ -30,12 +30,12 @@ function onSearchChange() {
 
 function isSearched(searchTerm) {
   const searchterm = searchTerm.toLowerCase();
-  return function(item) {
-    const dateObj = new Date(item.date);
+  return function({ date, event, participants }) {
+    const dateObj = new Date(date);
     const dateStr = dateObj.getDate() + ' ' + months[dateObj.getMonth()];
-    return item.event.toLowerCase().includes(searchterm) ||
+    return event.toLowerCase().includes(searchterm) ||
       dateStr.includes(searchterm) ||
-      item.participants.toLowerCase().includes(searchterm);
+      participants.toLowerCase().includes(searchterm);
   }
 }
 
